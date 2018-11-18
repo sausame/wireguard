@@ -64,7 +64,7 @@ EOF
 
 4、安装可能需要的软件
 
-sudo apt install openresolv
+sudo apt install openresolv nscd
 
 5、启动服务端
 
