@@ -81,6 +81,7 @@ sudo systemctl enable wg-quick@wg0
 
 7、检查配置和运行状态
 
+modprobe wireguard && lsmod | grep wireguard
 ping 8.8.8.8
 sudo wg
 
