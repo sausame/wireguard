@@ -29,14 +29,17 @@ c2=$(cat cpublickey)
 
 serverip=$(curl icanhazip.com)
 
+检查您的网卡名称，并设置ethname的值。
+ethname=
+
 下面整段复制执行
 
 sudo cat > /etc/wireguard/wg0.conf <<-EOF
 [Interface]
 PrivateKey = $s1
 Address = 10.0.0.1/24 
-PostUp   = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o ens4 -j MASQUERADE
-PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o ens4 -j MASQUERADE
+PostUp   = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $ethname -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $ethname -j MASQUERADE
 ListenPort = 21333
 DNS = 8.8.8.8
 MTU = 1420
@@ -64,7 +67,7 @@ EOF
 
 4、安装可能需要的软件
 
-sudo apt install openresolv nscd
+sudo apt install openresolv nscd unbound
 
 5、启动服务端
 
