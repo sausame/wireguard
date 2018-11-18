@@ -75,15 +75,19 @@ sudo apt install openresolv nscd unbound
 
 sudo wg-quick up wg0
 
-6、检查运行状态
+6、设置系统启动时运行
 
+sudo systemctl enable wg-quick@wg0
+
+7、检查配置和运行状态
+
+ping 8.8.8.8
 sudo wg
 
-7、将/etc/wireguard/下的client.conf传输到客户端电脑，并在tunsafe客户端使用client.conf。
+8、将/etc/wireguard/下的client.conf传输到客户端电脑，并在tunsafe客户端使用client.conf。
 
-
-
-
-
-
-
+参考：
+https://www.digitalocean.com/community/tutorials/how-to-create-a-point-to-point-vpn-with-wireguard-on-ubuntu-16-04
+https://www.linode.com/docs/networking/vpn/set-up-wireguard-vpn-on-ubuntu/
+https://www.marksei.com/how-to-vpn-wireguard/
+https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/
